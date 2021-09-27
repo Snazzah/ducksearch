@@ -27,20 +27,26 @@ export default class BotCommand extends SlashCommand {
       return {
         content: 'Invite ducksearch by clicking the button!',
         components: [
-          quickLinkButton({
-            label: 'Invite ducksearch',
-            url: 'https://discord.com/oauth2/authorize?client_id=886879779318530058&permissions=0&scope=applications.commands%20bot'
-          })
+          quickLinkButton(
+            {
+              label: 'Invite ducksearch',
+              url: 'https://discord.com/oauth2/authorize?client_id=886879779318530058&permissions=0&scope=applications.commands%20bot'
+            },
+            false
+          )
         ]
       };
     else if (ctx.subcommands[0] === 'github')
       return {
         content: 'View the source code of ducksearch by clicking the button!',
         components: [
-          quickLinkButton({
-            label: 'View GitHub Repository',
-            url: 'https://github.com/Snazzah/ducksearch'
-          })
+          quickLinkButton(
+            {
+              label: 'View GitHub Repository',
+              url: 'https://github.com/Snazzah/ducksearch'
+            },
+            false
+          )
         ]
       };
 
