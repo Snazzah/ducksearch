@@ -21,7 +21,7 @@
     "common-tags": "^1.8.0",
     "dayjs": "^1.10.7",
     "dotenv": "^10.0.0",
-    "duck-duck-scrape": "^2.1.4",
+    "duck-duck-scrape": "^2.1.5",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",

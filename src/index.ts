@@ -10,7 +10,7 @@ export const creator = new SlashCreator({
 creator.withServer(new CFWorkerServer()).registerCommands(commands);
 
 creator.on('warn', (message) => console.warn(message));
-creator.on('error', (error) => console.error(error));
+creator.on('error', (error) => console.error(error.stack || error.toString()));
 creator.on('commandRun', (command, _, ctx) =>
   console.info(`${ctx.user.username}#${ctx.user.discriminator} (${ctx.user.id}) ran command ${command.commandName}`)
 );
