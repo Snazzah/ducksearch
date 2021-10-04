@@ -2,6 +2,9 @@ name = "ducksearch"
 type = "javascript"
 account_id = ""
 workers_dev = true
+kv_namespaces = [
+  { binding = "CHANNEL_NSFW_CACHE", id = "" }
+]
 
 [build]
 command = "npm run build"
@@ -11,3 +14,6 @@ format = "service-worker"
 
 [env.development]
 vars = { COMMANDS_DEV_GUILD = "" }
+kv_namespaces = [
+  { binding = "CHANNEL_NSFW_CACHE", id = "" }
+]

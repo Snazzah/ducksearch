@@ -24,7 +24,7 @@ import {
   ApplicationCommandOptionChoice
 } from 'slash-create';
 import { decode } from 'html-entities';
-import { cutoffText, devGuild, quickLinkButton } from '../util';
+import { cutoffText, devGuild, isChannelNSFW, IsChannelNSFWReason, quickLinkButton } from '../util';
 import { stripIndents } from 'common-tags';
 
 const SafeSearchChoices: ApplicationCommandOptionChoice[] = [
@@ -75,8 +75,7 @@ export default class SearchCommand extends SlashCommand {
             {
               type: CommandOptionType.INTEGER,
               name: 'safesearch',
-              description:
-                'The Safe Search setting for the search. Strict by default, non-strict searches are ephemeral.',
+              description: 'The Safe Search setting for the search. Strict by default.',
               choices: SafeSearchChoices
             },
             {
@@ -128,8 +127,7 @@ export default class SearchCommand extends SlashCommand {
             {
               type: CommandOptionType.INTEGER,
               name: 'safesearch',
-              description:
-                'The Safe Search setting for the search. Strict by default, non-strict searches are ephemeral.',
+              description: 'The Safe Search setting for the search. Strict by default.',
               choices: MinimumSafeSearchChoices
             },
             {
@@ -329,8 +327,7 @@ export default class SearchCommand extends SlashCommand {
             {
               type: CommandOptionType.INTEGER,
               name: 'safesearch',
-              description:
-                'The Safe Search setting for the search. Strict by default, non-strict searches are ephemeral.',
+              description: 'The Safe Search setting for the search. Strict by default.',
               choices: SafeSearchChoices
             },
             {
@@ -382,8 +379,7 @@ export default class SearchCommand extends SlashCommand {
             {
               type: CommandOptionType.INTEGER,
               name: 'safesearch',
-              description:
-                'The Safe Search setting for the search. Strict by default, non-strict searches are ephemeral.',
+              description: 'The Safe Search setting for the search. Strict by default.',
               choices: SafeSearchChoices
             },
             {
@@ -509,10 +505,32 @@ export default class SearchCommand extends SlashCommand {
     };
   }
 
+  async determineNSFW(ctx: CommandContext) {
+    const nsfwResult = await isChannelNSFW(ctx);
+    if (
+      nsfwResult.reason === IsChannelNSFWReason.RESPONSE_FAILED ||
+      nsfwResult.reason === IsChannelNSFWReason.LIMIT_REACHED
+    )
+      return {
+        content: 'I could not determine whether this channel is marked as NSFW. Try again later.',
+        ephemeral: true
+      };
+    if (!nsfwResult.nsfw)
+      return {
+        content: 'You cannot change the Safe Search filter outside of NSFW channels.',
+        ephemeral: true
+      };
+  }
+
   async searchWeb(ctx: CommandContext) {
-    const ephemeral =
-      ctx.options.web.ephemeral ||
-      (ctx.options.web.safesearch !== undefined && ctx.options.web.safesearch !== SafeSearchType.STRICT);
+    const ephemeral = ctx.options.web.ephemeral;
+    const nsfw = ctx.options.web.safesearch !== undefined && ctx.options.web.safesearch !== SafeSearchType.STRICT;
+    await ctx.defer(ephemeral);
+
+    if (nsfw) {
+      const response = await this.determineNSFW(ctx);
+      if (response) return response;
+    }
 
     const query = ctx.options.web.query;
     const results = await search(query, {
@@ -557,9 +575,14 @@ export default class SearchCommand extends SlashCommand {
   }
 
   async searchImages(ctx: CommandContext) {
-    const ephemeral =
-      ctx.options.images.ephemeral ||
-      (ctx.options.images.safesearch !== undefined && ctx.options.images.safesearch !== SafeSearchType.STRICT);
+    const ephemeral = ctx.options.images.ephemeral;
+    const nsfw = ctx.options.images.safesearch !== undefined && ctx.options.images.safesearch !== SafeSearchType.STRICT;
+    await ctx.defer(ephemeral);
+
+    if (nsfw) {
+      const response = await this.determineNSFW(ctx);
+      if (response) return response;
+    }
 
     const query = ctx.options.images.query;
     const results = await searchImages(query, {
@@ -605,9 +628,14 @@ export default class SearchCommand extends SlashCommand {
   }
 
   async searchNews(ctx: CommandContext) {
-    const ephemeral =
-      ctx.options.news.ephemeral ||
-      (ctx.options.news.safesearch !== undefined && ctx.options.news.safesearch !== SafeSearchType.STRICT);
+    const ephemeral = ctx.options.news.ephemeral;
+    const nsfw = ctx.options.news.safesearch !== undefined && ctx.options.news.safesearch !== SafeSearchType.STRICT;
+    await ctx.defer(ephemeral);
+
+    if (nsfw) {
+      const response = await this.determineNSFW(ctx);
+      if (response) return response;
+    }
 
     const query = ctx.options.news.query;
     const results = await searchNews(query, {
@@ -649,9 +677,14 @@ export default class SearchCommand extends SlashCommand {
   }
 
   async searchVideos(ctx: CommandContext) {
-    const ephemeral =
-      ctx.options.videos.ephemeral ||
-      (ctx.options.videos.safesearch !== undefined && ctx.options.videos.safesearch !== SafeSearchType.STRICT);
+    const ephemeral = ctx.options.videos.ephemeral;
+    const nsfw = ctx.options.videos.safesearch !== undefined && ctx.options.videos.safesearch !== SafeSearchType.STRICT;
+    await ctx.defer(ephemeral);
+
+    if (nsfw) {
+      const response = await this.determineNSFW(ctx);
+      if (response) return response;
+    }
 
     const query = ctx.options.videos.query;
     const results = await searchVideos(query, {
