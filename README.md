@@ -7,6 +7,8 @@ Search with DuckDuckGo in Discord and utilize it's API using slash commands.
 
 [Invite](https://discord.com/oauth2/authorize?client_id=886879779318530058&permissions=0&scope=applications.commands%20bot)
 
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Snazzah/ducksearch)
+
 </div>
 
 ## Features
