@@ -1,14 +1,13 @@
 import { currency } from 'duck-duck-scrape';
 import { SlashCommand, CommandOptionType, SlashCreator, CommandContext } from 'slash-create';
 import { oneLine, stripIndents } from 'common-tags';
-import { devGuild, quickLinkButton } from '../util';
+import { quickLinkButton } from '../util';
 
 export default class CurrencyCommand extends SlashCommand {
   constructor(creator: SlashCreator) {
     super(creator, {
       name: 'currency',
       description: 'Convert currency.',
-      guildIDs: devGuild,
       options: [
         {
           type: CommandOptionType.STRING,

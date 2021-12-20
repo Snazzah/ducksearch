@@ -1,7 +1,7 @@
 import { dictionaryDefinition, dictionaryHyphenation, dictionaryPronunciation } from 'duck-duck-scrape';
 import { decode } from 'html-entities';
 import { SlashCommand, CommandOptionType, SlashCreator, CommandContext } from 'slash-create';
-import { cutoffText, devGuild, quickLinkButton } from '../util';
+import { cutoffText, quickLinkButton } from '../util';
 
 const PARTS_OF_SPEECH: Record<string, string> = {
   interjection: 'interj.',
@@ -25,7 +25,6 @@ export default class DictionaryCommand extends SlashCommand {
     super(creator, {
       name: 'define',
       description: 'Define a word.',
-      guildIDs: devGuild,
       options: [
         {
           type: CommandOptionType.STRING,

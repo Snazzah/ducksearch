@@ -24,7 +24,7 @@ import {
   ApplicationCommandOptionChoice
 } from 'slash-create';
 import { decode } from 'html-entities';
-import { cutoffText, devGuild, isChannelNSFW, IsChannelNSFWReason, quickLinkButton } from '../util';
+import { cutoffText, isChannelNSFW, IsChannelNSFWReason, quickLinkButton } from '../util';
 import { stripIndents } from 'common-tags';
 
 const SafeSearchChoices: ApplicationCommandOptionChoice[] = [
@@ -58,7 +58,6 @@ export default class SearchCommand extends SlashCommand {
     super(creator, {
       name: 'search',
       description: 'Search with DuckDuckGo.',
-      guildIDs: devGuild,
       options: [
         {
           type: CommandOptionType.SUB_COMMAND,

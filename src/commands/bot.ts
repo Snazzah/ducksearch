@@ -6,14 +6,13 @@ import {
   SlashCreator,
   CommandContext
 } from 'slash-create';
-import { devGuild, quickLinkButton } from '../util';
+import { quickLinkButton } from '../util';
 
 export default class BotCommand extends SlashCommand {
   constructor(creator: SlashCreator) {
     super(creator, {
       name: 'bot',
       description: 'Bot-specific commands.',
-      guildIDs: devGuild,
       options: [
         {
           type: CommandOptionType.SUB_COMMAND,

@@ -13,7 +13,6 @@ command = "npm run build"
 format = "service-worker"
 
 [env.development]
-vars = { COMMANDS_DEV_GUILD = "" }
 kv_namespaces = [
   { binding = "CHANNEL_NSFW_CACHE", id = "" }
 ]

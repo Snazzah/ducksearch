@@ -4,7 +4,7 @@ import utc from 'dayjs/plugin/utc';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { time, TimeLocation } from 'duck-duck-scrape';
 import { SlashCommand, CommandOptionType, SlashCreator, CommandContext } from 'slash-create';
-import { devGuild, quickLinkButton } from '../util';
+import { quickLinkButton } from '../util';
 dayjs.extend(utc);
 dayjs.extend(localizedFormat);
 
@@ -40,7 +40,6 @@ export default class TimeCommand extends SlashCommand {
     super(creator, {
       name: 'time',
       description: 'Get the time of a location.',
-      guildIDs: devGuild,
       options: [
         {
           type: CommandOptionType.STRING,
