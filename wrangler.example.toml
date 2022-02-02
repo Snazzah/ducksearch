@@ -1,6 +1,7 @@
 name = "ducksearch"
 type = "javascript"
 account_id = ""
+compatibility_date = "2022-02-02"
 workers_dev = true
 kv_namespaces = [
   { binding = "CHANNEL_NSFW_CACHE", id = "" }

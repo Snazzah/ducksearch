@@ -10,14 +10,15 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js'],
     plugins: [],
     alias: {
-      needle: require.resolve("./src/needle"),
+      needle: require.resolve('./src/needle')
     },
     fallback: {
       zlib: false,
       fs: false,
       https: false,
       fastify: false,
-      express: false
+      express: false,
+      path: false
     }
   },
   module: {
