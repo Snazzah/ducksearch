@@ -4,9 +4,7 @@ module.exports = {
   commandPath: './src/commands',
   env: {
     dev: {
-      token: process.env.DEV_DISCORD_BOT_TOKEN,
-      applicationId: process.env.DEV_DISCORD_APP_ID,
-      globalToGuild: process.env.COMMANDS_DEV_GUILD
+      globalToGuild: process.env.DEVELOPMENT_GUILD_ID
     }
   }
 };
