@@ -3,7 +3,7 @@ module.exports = {
   applicationId: process.env.DISCORD_APP_ID,
   commandPath: './src/commands',
   env: {
-    dev: {
+    development: {
       globalToGuild: process.env.DEVELOPMENT_GUILD_ID
     }
   }

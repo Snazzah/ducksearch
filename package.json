@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "dev": "miniflare -e dev.env",
+    "dev": "miniflare -e development.env --watch",
     "dev:cf": "wrangler dev -e development",
     "deploy": "wrangler publish",
     "sync": "npx slash-up sync",
