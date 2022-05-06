@@ -4,7 +4,7 @@ import { TransformedRequest } from 'slash-create';
 
 function hex2bin(hex: string) {
   const buf = new Uint8Array(Math.ceil(hex.length / 2));
-  for (var i = 0; i < buf.length; i++) {
+  for (let i = 0; i < buf.length; i++) {
     buf[i] = parseInt(hex.substr(i * 2, 2), 16);
   }
   return buf;
@@ -31,10 +31,5 @@ export async function verify(treq: TransformedRequest) {
   const timestamp = treq.headers['x-signature-timestamp'] as string;
   const unknown = JSON.stringify(treq.body);
 
-  return await crypto.subtle.verify(
-    'NODE-ED25519',
-    await getPublicKey(),
-    signature,
-    encoder.encode(timestamp + unknown)
-  );
+  return await crypto.subtle.verify('NODE-ED25519', await getPublicKey(), signature, encoder.encode(timestamp + unknown));
 }

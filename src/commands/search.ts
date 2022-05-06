@@ -1,3 +1,4 @@
+import { stripIndents } from 'common-tags';
 import {
   AutocompleteResult,
   ImageColor,
@@ -15,17 +16,10 @@ import {
   VideoDuration,
   VideoLicense
 } from 'duck-duck-scrape';
-import {
-  AutocompleteContext,
-  SlashCommand,
-  CommandOptionType,
-  SlashCreator,
-  CommandContext,
-  ApplicationCommandOptionChoice
-} from 'slash-create';
 import { decode } from 'html-entities';
+import { ApplicationCommandOptionChoice, AutocompleteContext, CommandContext, CommandOptionType, SlashCommand, SlashCreator } from 'slash-create';
+
 import { cutoffText, isChannelNSFW, IsChannelNSFWReason, quickLinkButton } from '../util';
-import { stripIndents } from 'common-tags';
 
 const SafeSearchChoices: ApplicationCommandOptionChoice[] = [
   {
@@ -506,10 +500,7 @@ export default class SearchCommand extends SlashCommand {
 
   async determineNSFW(ctx: CommandContext) {
     const nsfwResult = await isChannelNSFW(ctx);
-    if (
-      nsfwResult.reason === IsChannelNSFWReason.RESPONSE_FAILED ||
-      nsfwResult.reason === IsChannelNSFWReason.LIMIT_REACHED
-    )
+    if (nsfwResult.reason === IsChannelNSFWReason.RESPONSE_FAILED || nsfwResult.reason === IsChannelNSFWReason.LIMIT_REACHED)
       return {
         content: 'I could not determine whether this channel is marked as NSFW. Try again later.',
         ephemeral: true
@@ -607,9 +598,7 @@ export default class SearchCommand extends SlashCommand {
           title: decode(topResult.title),
           image: { url: topResult.image },
           footer: {
-            text: `[${topResult.width}x${topResult.height}]\n... ${results.results.length - 1} more result${
-              results.results.length === 1 ? '' : 's'
-            }`
+            text: `[${topResult.width}x${topResult.height}]\n... ${results.results.length - 1} more result${results.results.length === 1 ? '' : 's'}`
           }
         }
       ],
@@ -714,9 +703,7 @@ export default class SearchCommand extends SlashCommand {
           footer: {
             text: stripIndents`
               ${topResult.duration}${
-              topResult.viewCount
-                ? ` - ${topResult.viewCount.toLocaleString()} view${topResult.viewCount === 1 ? '' : 's'}`
-                : ''
+              topResult.viewCount ? ` - ${topResult.viewCount.toLocaleString()} view${topResult.viewCount === 1 ? '' : 's'}` : ''
             }
               ... ${results.results.length - 1} more result${results.results.length === 1 ? '' : 's'}
             `

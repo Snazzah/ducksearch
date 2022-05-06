@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   output: {
     filename: 'worker.js',
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist')
   },
   mode: 'production',
   resolve: {
@@ -27,9 +27,9 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         options: {
-          transpileOnly: true,
-        },
-      },
-    ],
-  },
-}
+          transpileOnly: true
+        }
+      }
+    ]
+  }
+};

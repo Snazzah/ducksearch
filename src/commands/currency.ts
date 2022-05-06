@@ -1,6 +1,7 @@
-import { currency } from 'duck-duck-scrape';
-import { SlashCommand, CommandOptionType, SlashCreator, CommandContext } from 'slash-create';
 import { oneLine, stripIndents } from 'common-tags';
+import { currency } from 'duck-duck-scrape';
+import { CommandContext, CommandOptionType, SlashCommand, SlashCreator } from 'slash-create';
+
 import { quickLinkButton } from '../util';
 
 export default class CurrencyCommand extends SlashCommand {
@@ -68,10 +69,7 @@ export default class CurrencyCommand extends SlashCommand {
                 response.conversion['from-currency-symbol']
               }) also converts to...
                 ${response.topConversions
-                  .map(
-                    (conv) =>
-                      `**${conv['converted-amount']}** ${conv['to-currency-name']} (${conv['to-currency-symbol']})`
-                  )
+                  .map((conv) => `**${conv['converted-amount']}** ${conv['to-currency-name']} (${conv['to-currency-symbol']})`)
                   .join('\n')}
               `
             }

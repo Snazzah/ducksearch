@@ -4,10 +4,7 @@ export function cutoffText(text: string, limit = 2000) {
   return text.length > limit ? text.slice(0, limit - 1) + '…' : text;
 }
 
-export function quickLinkButton(
-  btn: Omit<ComponentButtonLink, 'type' | 'style'>,
-  includeDelete = true
-): ComponentActionRow {
+export function quickLinkButton(btn: Omit<ComponentButtonLink, 'type' | 'style'>, includeDelete = true): ComponentActionRow {
   return {
     type: ComponentType.ACTION_ROW,
     components: includeDelete

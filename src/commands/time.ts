@@ -1,10 +1,12 @@
 import { stripIndents } from 'common-tags';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import utc from 'dayjs/plugin/utc';
 import { time, TimeLocation } from 'duck-duck-scrape';
-import { SlashCommand, CommandOptionType, SlashCreator, CommandContext } from 'slash-create';
+import { CommandContext, CommandOptionType, SlashCommand, SlashCreator } from 'slash-create';
+
 import { quickLinkButton } from '../util';
+
 dayjs.extend(utc);
 dayjs.extend(localizedFormat);
 

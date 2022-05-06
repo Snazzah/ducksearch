@@ -1,4 +1,5 @@
 import { Creator, RespondFunction, Server, SlashCreatorOptions, TransformedRequest } from 'slash-create';
+
 import { RequestHandler } from './util/requestHandler';
 import { verify } from './util/verify';
 
@@ -42,11 +43,7 @@ export class SlashCreator extends Creator {
     const timestamp = treq.headers['x-signature-timestamp'] as string;
 
     // Check if both signature and timestamp exists, and the timestamp isn't past due.
-    if (
-      !signature ||
-      !timestamp ||
-      parseInt(timestamp) < (Date.now() - (this.options.maxSignatureTimestamp as number)) / 1000
-    )
+    if (!signature || !timestamp || parseInt(timestamp) < (Date.now() - (this.options.maxSignatureTimestamp as number)) / 1000)
       return respond({
         status: 401,
         body: 'Invalid signature'

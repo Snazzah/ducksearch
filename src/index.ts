@@ -1,5 +1,5 @@
 import { commands } from './commands';
-import { SlashCreator, CFWorkerServer } from './shim';
+import { CFWorkerServer, SlashCreator } from './shim';
 
 export const creator = new SlashCreator({
   applicationID: DISCORD_APP_ID,

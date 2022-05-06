@@ -15,8 +15,7 @@ export class CFWorkerServer extends Server {
   /** @private */
   createEndpoint(path: string, handler: ServerRequestHandler) {
     addEventListener('fetch', (event) => {
-      if (event.request.method !== 'POST')
-        return event.respondWith(new Response('Server only supports POST requests.', { status: 405 }));
+      if (event.request.method !== 'POST') return event.respondWith(new Response('Server only supports POST requests.', { status: 405 }));
       return event.respondWith(
         // eslint-disable-next-line no-async-promise-executor
         new Promise(async (resolve) => {

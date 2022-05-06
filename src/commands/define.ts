@@ -1,6 +1,7 @@
 import { dictionaryDefinition, dictionaryHyphenation, dictionaryPronunciation } from 'duck-duck-scrape';
 import { decode } from 'html-entities';
-import { SlashCommand, CommandOptionType, SlashCreator, CommandContext } from 'slash-create';
+import { CommandContext, CommandOptionType, SlashCommand, SlashCreator } from 'slash-create';
+
 import { cutoffText, quickLinkButton } from '../util';
 
 const PARTS_OF_SPEECH: Record<string, string> = {

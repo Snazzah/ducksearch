@@ -1,11 +1,5 @@
-import {
-  SlashCommand,
-  CommandOptionType,
-  ComponentType,
-  ButtonStyle,
-  SlashCreator,
-  CommandContext
-} from 'slash-create';
+import { ButtonStyle, CommandContext, CommandOptionType, ComponentType, SlashCommand, SlashCreator } from 'slash-create';
+
 import { quickLinkButton } from '../util';
 
 export default class BotCommand extends SlashCommand {
@@ -62,8 +56,7 @@ export default class BotCommand extends SlashCommand {
       };
     else if (ctx.subcommands[0] === 'info')
       return {
-        content:
-          '**ducksearch** is a bot that searches from DuckDuckGo with Discord slash commands with some other API commands included.',
+        content: '**ducksearch** is a bot that searches from DuckDuckGo with Discord slash commands with some other API commands included.',
         components: [
           {
             type: ComponentType.ACTION_ROW,
